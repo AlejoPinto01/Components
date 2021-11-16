@@ -1,6 +1,7 @@
-import 'package:componentes/src/pages/home_temp.dart';
 import 'package:flutter/material.dart';
-// ignore_for_file: prefer_const_constructors
+
+import 'src/pages/home_page.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -9,7 +10,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Componentes',
-      home: HomePageTemp(),
+      home: HomePage(),
     );
   }
 }
