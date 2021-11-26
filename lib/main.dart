@@ -1,3 +1,7 @@
+import 'package:componentes/src/pages/alert_page.dart';
+import 'package:componentes/src/pages/avatar_page.dart';
+import 'package:componentes/src/pages/card_page.dart';
+import 'package:componentes/src/routes.dart';
 import 'package:flutter/material.dart';
 
 import 'src/pages/home_page.dart';
@@ -10,7 +14,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Componentes',
-      home: HomePage(),
+      //home: HomePage(),
+      initialRoute: '/',
+      routes: getRutes(),
+      onGenerateRoute: (RouteSettings settings) {
+        print('Hemos ido a: ${settings.name}');
+        return MaterialPageRoute(
+            builder: (BuildContext context) => AlertPage());
+      },
     );
   }
 }
