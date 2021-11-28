@@ -18,7 +18,7 @@ class CardPage extends StatelessWidget {
         children: [
           _cardTipus1(),
           SizedBox(
-            height: 30,
+            height: 20,
           ),
           _cardTipus2()
         ],
@@ -29,7 +29,7 @@ class CardPage extends StatelessWidget {
   _cardTipus1() {
     return Card(
         elevation: 10,
-        shadowColor: Colors.red,
+        shadowColor: Colors.grey,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         child: Column(children: [
           ListTile(
@@ -51,7 +51,7 @@ class CardPage extends StatelessWidget {
   }
 
   _cardTipus2() {
-    final tarjeta = Card(
+    final tarjeta = Container(
       //clipBehavior: Clip.antiAlias,
       //shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Column(
@@ -72,11 +72,21 @@ class CardPage extends StatelessWidget {
       ),
     );
     return Container(
-        child: ClipRRect(
-          child: tarjeta,
-          borderRadius: BorderRadius.circular(100.0),
-        ),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(100.0), color: Colors.red));
+      child: ClipRRect(
+        child: tarjeta,
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15.0),
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+              color: Colors.grey,
+              blurRadius: 10,
+              spreadRadius: 2,
+              offset: Offset(2, 2))
+        ],
+        color: Colors.white,
+      ),
+    );
   }
 }
