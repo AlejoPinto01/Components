@@ -27,10 +27,28 @@ class _AnimatedContainerPageState extends State<AnimatedContainerPage> {
           curve: Curves.easeInOutCubic,
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _randomContainer(),
-        child: Icon(Icons.play_arrow),
-      ),
+      floatingActionButton: _crearBotones(),
+    );
+  }
+
+  _crearBotones() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: <Widget>[
+        FloatingActionButton(
+          heroTag: null,
+          onPressed: () => _reset(),
+          child: Icon(Icons.restore),
+        ),
+        SizedBox(
+          width: 5.0,
+        ),
+        FloatingActionButton(
+          heroTag: null,
+          onPressed: () => _randomContainer(),
+          child: Icon(Icons.play_arrow),
+        ),
+      ],
     );
   }
 
@@ -42,6 +60,15 @@ class _AnimatedContainerPageState extends State<AnimatedContainerPage> {
       _color = Color.fromRGBO(
           random.nextInt(255), random.nextInt(255), random.nextInt(255), 1);
       _borderRadius = BorderRadius.circular(random.nextInt(100).toDouble());
+    });
+  }
+
+  void _reset() {
+    setState(() {
+      _width = 50;
+      _height = 50;
+      _color = Colors.pink;
+      _borderRadius = BorderRadius.circular(10);
     });
   }
 }

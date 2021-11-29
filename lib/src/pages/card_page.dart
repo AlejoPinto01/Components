@@ -80,10 +80,11 @@ class CardPage extends StatelessWidget {
         borderRadius: BorderRadius.circular(15.0),
         boxShadow: <BoxShadow>[
           BoxShadow(
-              color: Colors.grey,
-              blurRadius: 10,
-              spreadRadius: 2,
-              offset: Offset(2, 2))
+            color: Colors.grey,
+            blurRadius: 10,
+            spreadRadius: 2,
+            offset: Offset(2, 2),
+          ),
         ],
         color: Colors.white,
       ),

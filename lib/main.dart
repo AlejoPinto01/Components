@@ -1,10 +1,7 @@
 import 'package:componentes/src/pages/alert_page.dart';
-import 'package:componentes/src/pages/avatar_page.dart';
-import 'package:componentes/src/pages/card_page.dart';
 import 'package:componentes/src/routes.dart';
 import 'package:flutter/material.dart';
 
-import 'src/pages/home_page.dart';
 
 void main() => runApp(MyApp());
 
