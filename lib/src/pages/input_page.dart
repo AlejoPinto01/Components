@@ -8,10 +8,22 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   String _nom = '';
   String _email = '';
+  String _data = '';
+  String _pais = 'USA';
   bool _passwordVisible = true;
   var _userController = TextEditingController();
   var _emailController = TextEditingController();
   var _passwController = TextEditingController();
+  var _dateController = TextEditingController();
+  List<String> _paises = [
+    'USA',
+    'Argentina',
+    'Mexico',
+    'España',
+    'Francia',
+    'Alemania',
+    'Italia',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +39,10 @@ class _InputPageState extends State<InputPage> {
           _crearEmail(),
           Divider(),
           _crearPassword(),
+          Divider(),
+          _crearData(context),
+          Divider(),
+          crearDropdown(),
           Divider(),
           _crearPersona(),
         ],
@@ -79,7 +95,7 @@ class _InputPageState extends State<InputPage> {
       decoration: InputDecoration(
         labelText: 'Correo electrónico',
         hintText: 'ejemplo@gmail.com',
-        suffixIcon: Icon(Icons.send),
+        suffixIcon: Icon(Icons.email),
         icon: Icon(Icons.alternate_email),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
@@ -102,7 +118,7 @@ class _InputPageState extends State<InputPage> {
         labelText: 'Contraseña',
         hintText: '*******',
         helperText: 'Debe contener al menos 1 mayúscula y 1 número',
-        icon: Icon(Icons.password),
+        icon: Icon(Icons.lock),
         suffixIcon: IconButton(
           icon: _passwordVisible
               ? Icon(Icons.visibility_off)
@@ -121,10 +137,82 @@ class _InputPageState extends State<InputPage> {
     );
   }
 
+  _crearData(BuildContext context) {
+    return TextField(
+      enableInteractiveSelection: false,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+        icon: Icon(Icons.calendar_today),
+        hintText: 'dd/mm/aaaa',
+        labelText: 'Fecha de nacimiento',
+      ),
+      controller: _dateController,
+      onTap: () {
+        FocusScope.of(context).requestFocus(new FocusNode());
+        _seleccionarData(context);
+      },
+    );
+  }
+
   _crearPersona() {
     return ListTile(
       title: Text('Nombre: $_nom'),
-      subtitle: Text('Correo: ${_email}'),
+      subtitle: Text('Correo: $_email'),
+      trailing: Text(_pais),
     );
+  }
+
+  Future<void> _seleccionarData(BuildContext context) async {
+    DateTime? picked = await showDatePicker(
+      context: context,
+      locale: Locale('es', 'ES'),
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2020),
+      lastDate: DateTime(2025),
+    );
+    if (picked != null) {
+      setState(() {
+        _data = picked.toString();
+        _dateController.text = _data;
+      });
+    }
+  }
+
+  Widget crearDropdown() {
+    return Row(
+      children: [
+        Icon(Icons.language),
+        SizedBox(width: 30),
+        Expanded(
+          child: DropdownButton(
+            hint: Text('Country'),
+            value: _pais,
+            items: getOptionDropdown(),
+            onChanged: (option) {
+              setState(() {
+                _pais = option as String;
+              });
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  List<DropdownMenuItem<String>> getOptionDropdown() {
+    List<DropdownMenuItem<String>> llista = [];
+    _paises.forEach(
+      (element) {
+        llista.add(
+          DropdownMenuItem(
+            child: Text(element),
+            value: element,
+          ),
+        );
+      },
+    );
+    return llista;
   }
 }
